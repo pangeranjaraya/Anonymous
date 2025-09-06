@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Neon Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --neon-white: #fff;
+      --bg-dark: #0a0a0f;
+      --text-light: #fff;
+    }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      transition: background 0.4s, color 0.4s;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 2rem 1.2rem;
+    }
+    .neon-title {
+      font-size: 2.7rem;
+      font-weight: 800;
+      text-align: center;
+      color: var(--neon-white);
+      text-shadow: 0 0 16px #fff, 0 0 32px #fff, 0 0 8px #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+    }
+    .neon-section {
+      background: rgba(30,30,30,0.95);
+      border-radius: 1.2rem;
+      box-shadow: 0 0 24px 0 #fff, 0 2px 16px 0 #fff, 0 0 32px #fff;
+      padding: 1.5rem 1.7rem;
+      margin-bottom: 2rem;
+      border: 2px solid #fff;
+      position: relative;
+    }
+    .shop-item {
+      background: #111;
+      border-radius: 1rem;
+      box-shadow: 0 0 16px #fff;
+      border: 1.5px solid #fff;
+      padding: 1.2rem 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .shop-item img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 0.7rem;
+      box-shadow: 0 0 8px #fff;
+      background: #fff;
+    }
+    .shop-item-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.1rem;
+      text-shadow: 0 0 8px #fff, 0 0 8px #fff;
+    }
+    .shop-item {
+      background: #111;
+      border-radius: 1rem;
+      box-shadow: 0 0 16px #fff;
+      border: 1.5px solid #fff;
+      padding: 1.2rem 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s;
+      opacity: 0;
+      transform: translateY(30px);
+      flex-wrap: wrap;
+    }
+    .shop-item-cat {
+      display: inline-block;
+      background: #fff;
+      color: #111;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 0.2rem 0.8rem;
+      margin-bottom: 0.3rem;
+      margin-right: 0.5rem;
+      box-shadow: 0 0 8px #fff;
+    }
+
+    .shop-btn {
+      border: 2px solid #fff;
+      border-radius: 0.7rem;
+      padding: 0.5rem 1.2rem;
+      box-shadow: 0 0 16px #fff, 0 0 32px #fff;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .shop-btn:hover {
+      background: #fff;
+      color: #111;
+      box-shadow: 0 0 32px #fff, 0 0 16px #fff;
+    }
+    .cat-btn {
+      background: #111;
+      color: #fff;
+      font-weight: 700;
+      border: 2px solid #fff;
+      border-radius: 0.7rem;
+      padding: 0.5rem 1.2rem;
+      box-shadow: 0 0 8px #fff;
+      cursor: pointer;
+      margin-bottom: 0.2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .cat-btn.active, .cat-btn:focus {
+      background: #fff;
+      color: #111;
+      box-shadow: 0 0 16px #fff;
+      outline: none;
+    }
+    a.back-link {
+      color: #fff;
+      text-shadow: 0 0 8px #fff;
+      font-weight: 700;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 1.2rem 0.3rem; }
+      .neon-title { font-size: 2rem; }
+      .neon-section { padding: 1rem 0.5rem; }
+      .shop-item { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+      .shop-item img { width: 56px; height: 56px; }
+      .shop-btn { font-size: 1rem; padding: 0.7rem 1.2rem; }
+      input, select, textarea, button { font-size: 1rem !important; }
+      #shopList { max-height: 340px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container mx-auto px-4 py-8">
+  <div class="neon-title">Shop</div>
+  <section class="neon-section">
+      <!-- Search Produk -->
+  <form id="searchForm" style="margin-bottom:1.2rem;display:flex;gap:0.7rem;align-items:center;flex-wrap:wrap;z-index:2;position:relative;background:#232323;border-radius:0.7rem;padding:0.5rem 0.7rem 0.5rem 0.7rem;box-shadow:0 0 8px #f7df1e;">
+        <input id="searchInput" type="text" placeholder="Cari produk..." style="flex:2 1 180px;padding:0.5rem 1rem;border-radius:0.7rem;border:none;outline:none;background:#232323;color:#f7df1e;font-size:1rem;box-shadow:0 0 8px #f7df1e;" />
+        <button type="submit" style="padding:0.5rem 1.2rem;border-radius:0.7rem;background:#f7df1e;color:#181818;font-weight:700;box-shadow:0 0 8px #f7df1e;cursor:pointer;">Cari</button>
+      </form>
+      <!-- Scrollable kategori bar -->
+  <div id="catBar" style="display:flex;gap:0.7rem;overflow-x:auto;padding:0.5rem 0 0.5rem 0.2rem;margin-bottom:1.2rem;background:#181818;border-radius:0.7rem;box-shadow:0 0 8px #f7df1e;z-index:1;position:relative;">
+        <button class="cat-btn" data-cat="" style="background:#f7df1e;color:#181818;font-weight:700;border:none;border-radius:0.7rem;padding:0.5rem 1.2rem;box-shadow:0 0 8px #f7df1e;cursor:pointer;">Semua</button>
+      </div>
+      <div id="notif" style="display:none;background:#f7df1e;color:#181818;padding:0.7rem 1rem;border-radius:0.7rem;font-weight:700;text-align:center;margin-bottom:1rem;box-shadow:0 0 8px #f7df1e;"></div>
+  <div id="shopList" style="max-height:520px;overflow-y:auto;scrollbar-width:thin;margin-top:0.5rem;">
+        <!-- Produk akan di-render oleh JavaScript -->
+      </div>
+    </section>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="neon-portfolio.html" class="back-link">&larr; Kembali ke Portfolio</a>
+    </div>
+  </div>
+  <footer style="margin-top:3rem;text-align:center;color:#fff;font-size:1rem;opacity:0.8;text-shadow:0 0 8px #fff;">
+    &copy; 2025 DEV PANGERAN Shop. All rights reserved.
+  </footer>
+<script>
+// Data produk (50 produk, 5 kategori)
+const categories = [
+  "Mantann",
+  "So Setia",
+  "Kecantikan",
+  "Hmm",
+  "Si Paling Setia"
+];
+const products = [];
+for(let i=1;i<=50;i++){
+  let cat = categories[(i-1)%categories.length];
+  let title = cat+" APK RANSOMWARE #"+i;
+  let desc = `Produk ${cat.toLowerCase()} APK RANSOMWARE edisi ke-${i}, desain modern dan premium.`;
+  let price = `Rp ${15_000 + (i*1000)}`;
+  let img = "https://files.catbox.moe/5rik3h.jpg";
+  let wa = "https://wa.me/085624481275";
+  products.push({title,desc,price,img,wa,cat});
+}
+
+// Render produk dengan animasi
+function renderProducts(list) {
+  const shopList = document.getElementById('shopList');
+  shopList.innerHTML = '';
+  list.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'shop-item';
+    item.style.opacity = 0;
+    item.style.transform = 'translateY(30px)';
+    item.innerHTML = `
+      <img src="${p.img}" alt="${p.title}">
+      <div>
+        <span class="shop-item-cat">${p.cat}</span>
+        <div class="shop-item-title">${p.title}</div>
+        <div class="shop-item-desc">${p.desc}</div>
+        <div class="shop-item-price">${p.price}</div>
+        <button class="shop-btn" onclick="buyNotif('${p.title}', '${p.wa}')">Beli via Telegram</button>
+      </div>
+    `;
+    shopList.appendChild(item);
+    setTimeout(() => {
+      item.style.transition = 'opacity 0.6s cubic-bezier(.4,2,.3,1), transform 0.6s cubic-bezier(.4,2,.3,1)';
+      item.style.opacity = 1;
+      item.style.transform = 'translateY(0)';
+    }, 100 + i * 60);
+  });
+}
+
+// Notifikasi pembelian
+function buyNotif(nama, wa) {
+  const notif = document.getElementById('notif');
+  notif.textContent = `Terima kasih telah memilih ${nama}! Silakan lanjutkan pembelian di WhatsApp.`;
+  notif.style.display = 'block';
+  setTimeout(() => { notif.style.display = 'none'; }, 3500);
+  window.open(wa, '_blank');
+}
+
+
+// Render kategori ke catBar
+const catBar = document.getElementById('catBar');
+categories.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'cat-btn';
+  btn.textContent = cat;
+  btn.setAttribute('data-cat', cat);
+  btn.style.background = '#232323';
+  btn.style.color = '#f7df1e';
+  btn.style.fontWeight = '700';
+  btn.style.border = 'none';
+  btn.style.borderRadius = '0.7rem';
+  btn.style.padding = '0.5rem 1.2rem';
+  btn.style.boxShadow = '0 0 8px #f7df1e';
+  btn.style.cursor = 'pointer';
+  catBar.appendChild(btn);
+});
+
+// Highlight kategori aktif
+function highlightCat(cat) {
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    if(btn.getAttribute('data-cat') === cat) {
+      btn.style.background = '#f7df1e';
+      btn.style.color = '#181818';
+    } else if(btn.getAttribute('data-cat') === '') {
+      btn.style.background = '#f7df1e';
+      btn.style.color = '#181818';
+    } else {
+      btn.style.background = '#232323';
+      btn.style.color = '#f7df1e';
+    }
+  });
+}
+
+// Search produk
+let currentCat = '';
+document.getElementById('searchForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = products.filter(p =>
+    (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)) &&
+    (currentCat === '' || p.cat === currentCat)
+  );
+  renderProducts(filtered);
+});
+
+// Klik kategori bar
+catBar.addEventListener('click', function(e) {
+  if(e.target.classList.contains('cat-btn')) {
+    currentCat = e.target.getAttribute('data-cat');
+    highlightCat(currentCat);
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = products.filter(p =>
+      (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)) &&
+      (currentCat === '' || p.cat === currentCat)
+    );
+    renderProducts(filtered);
+  }
+});
+
+// Highlight default
+highlightCat('');
+
+// Render awal
+renderProducts(products);
+</script>
+</body>
+</html>
